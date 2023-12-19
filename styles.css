@@ -49,9 +49,16 @@
     display: none;
 }
 
+.pieces {
+    width: 98px;
+}
+
 .blue-piece {
-    z-index: 2;
-    width: 100px;
     border: white solid 2px;
+    border-radius: 50%;
+}
+
+.white-piece {
+    border: black solid 2px;
     border-radius: 50%;
 }
