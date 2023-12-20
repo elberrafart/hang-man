@@ -2,118 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- <meta name="viewport" content="width=s, initial-scale=1.0"> -->
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT&display=swap" rel="stylesheet">
-    <title>Checkers</title>
-    <script src="app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HangMan</title>
+    <link href="styles.css" rel="stylesheet">
 </head>
 <body>
-    <h1 class="checkers-title">Checkers</h1>
-    <!-- <div class="checkers-table">
-        
-    </div> -->
-    <table class="checkerboard">
-        <tbody>
-            <!-- Create an 8x8 grid using HTML -->
-            <!--First Row-->
-            <tr>
-                <td></td>
-                <td><img src='images/checker-piece-blue.png' class="blue-piece pieces"></td>
-                <td></td>
-                <td><img src='images/checker-piece-blue.png' class="blue-piece pieces"></td>
-                <td></td>
-                <td><img src='images/checker-piece-blue.png' class="blue-piece pieces"></td>
-                <td></td>
-                <td><img src='images/checker-piece-blue.png' class="blue-piece pieces"></td>
-            </tr>
-            <!--Second Row-->
-            <tr>
-                <td><img src='images/checker-piece-blue.png' class="blue-piece pieces"></td>
-                <td></td>
-                <td><img src='images/checker-piece-blue.png' class="blue-piece pieces"></td>
-                <td></td>
-                <td><img src='images/checker-piece-blue.png' class="blue-piece pieces"></td>
-                <td></td>
-                <td><img src='images/checker-piece-blue.png' class="blue-piece pieces"></td>
-                <td></td>
-            </tr>
-            <!--Third Row-->
-            <tr>
-                <td></td>
-                <td><img src='images/checker-piece-blue.png' class="blue-piece pieces"></td>
-                <td></td>
-                <td><img src='images/checker-piece-blue.png' class="blue-piece pieces"></td>
-                <td></td>
-                <td><img src='images/checker-piece-blue.png' class="blue-piece pieces"></td>
-                <td></td>
-                <td><img src='images/checker-piece-blue.png' class="blue-piece pieces"></td>
-            </tr>
-            <!--Fourth Row-->
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <!--Fifth Row-->
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <!--Sixth Row-->
-            <tr>
-                <td><img src='images/checker-piece-white.png' class="white-piece pieces"></td>
-                <td></td>
-                <td><img src='images/checker-piece-white.png' class="white-piece pieces"></td>
-                <td></td>
-                <td><img src='images/checker-piece-white.png' class="white-piece pieces"></td>
-                <td></td>
-                <td><img src='images/checker-piece-white.png' class="white-piece pieces"></td>
-                <td></td>
-            </tr>
-            <!--Seventh Row-->
-            <tr>
-                <td></td>
-                <td><img src='images/checker-piece-white.png' class="white-piece pieces"></td>
-                <td></td>
-                <td><img src='images/checker-piece-white.png' class="white-piece pieces"></td>
-                <td></td>
-                <td><img src='images/checker-piece-white.png' class="white-piece pieces"></td>
-                <td></td>
-                <td><img src='images/checker-piece-white.png' class="white-piece pieces"></td>
-            </tr>
-            <!--Eigth Row-->
-            <tr>
-                <td><img src='images/checker-piece-white.png' class="white-piece pieces"></td>
-                <td></td>
-                <td><img src='images/checker-piece-white.png' class="white-piece pieces"></td>
-                <td></td>
-                <td><img src='images/checker-piece-white.png' class="white-piece pieces"></td>
-                <td></td>
-                <td><img src='images/checker-piece-white.png' class="white-piece pieces"></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div class="modal">
-        <h1>Do you wanna play a game?</h1>
-        <button>Yes!</button>
-        
-    </div>
+    <h1>HangMan</h1>
+    <section>
+        <div class="letter-container">
+            <div class="letter-box">A</div>
+            <div class="letter-box">B</div>
+            <div class="letter-box">C</div>
+            <div class="letter-box">D</div>
+            <div class="letter-box">E</div>
+            <div class="letter-box">F</div>
+            <div class="letter-box">G</div>
+            <div class="letter-box">H</div>
+            <div class="letter-box">I</div>
+            <div class="letter-box">J</div>
+            <div class="letter-box">K</div>
+            <div class="letter-box">L</div>
+            <div class="letter-box">M</div>
+            <div class="letter-box">N</div>
+            <div class="letter-box">O</div>
+            <div class="letter-box">P</div>
+            <div class="letter-box">Q</div>
+            <div class="letter-box">R</div>
+            <div class="letter-box">S</div>
+            <div class="letter-box">T</div>
+            <div class="letter-box">U</div>
+            <div class="letter-box">V</div>
+            <div class="letter-box">W</div>
+            <div class="letter-box">X</div>
+            <div class="letter-box">Y</div>
+            <div class="letter-box">Z</div>
+        </div>
+        <div class="correct-letters-con">
+            <div class="correct-letter">R</div>
+            <div class="correct-letter">E</div>
+            <div class="correct-letter">A</div>
+            <div class="correct-letter">D</div>
+        </div>
+    </section>
     
 </body>
 </html>

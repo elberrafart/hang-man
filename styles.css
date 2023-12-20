@@ -1,64 +1,44 @@
-* {
-    margin: 0;
-    padding: 0;
+html, body {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.checkers-title {
+body {
+    background-color: #4ABDFF;
+}
+
+h1 {
     text-align: center;
-    margin-top: 100px;
-    font-family: 'Old Standard TT';
-    font-size: 60px;
-    font-weight: bold;
-    letter-spacing: 4px;
 }
 
-/* .checkers-table {
-    border: black 2px solid;
-    margin: 10rem auto;
-    height: 70vh;
-    width: 70vh;
-    background-image: url('images/Checkerboard.jpg');
-    background-size: cover;
-    padding: 0;
-} */
-
-.checkerboard {
-    border-collapse: collapse;
-    margin: 0 auto;
+.letter-container {
+    display: flex;
+    flex-wrap: wrap;
 }
-.checkerboard td {
-    width: 100px;
+
+.letter-box {
+    background-color: #FFC803;
+    max-width: 100px;
     height: 100px;
-    border: 1px solid #000;
+    margin: 10px;
+    border: solid black 4px;
+    text-align: center;
+    font-size: 50px;
+    color: white;
+    /* Adjust Positioning */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    flex-basis: 10%;
 }
 
-.checkerboard tr:nth-child(even) td:nth-child(odd),
-.checkerboard tr:nth-child(odd) td:nth-child(even) {
-    background-color: #ccc;
+.correct-letters-con {
+    display: flex;
 }
 
-.modal {
-    position: fixed;
-    top: 50px;
-    left: 100px;
-    background-color: brown;
-    width: 1000px;
-    height: 1000px;
-    border-radius: 50px;
-    border: solid 2px black;
-    display: none;
-}
-
-.pieces {
-    width: 98px;
-}
-
-.blue-piece {
-    border: white solid 2px;
-    border-radius: 50%;
-}
-
-.white-piece {
-    border: black solid 2px;
-    border-radius: 50%;
+.correct-letter {
+    border-bottom: solid white 2px;
+    height: 100px;
+    width: 100px;
 }
