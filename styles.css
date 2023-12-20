@@ -35,10 +35,18 @@ h1 {
 
 .correct-letters-con {
     display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 200px 400px;
 }
 
 .correct-letter {
-    border-bottom: solid white 2px;
+    border-bottom: solid white 5px;
     height: 100px;
     width: 100px;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: flex-end; /* Align text to the bottom */
+    font-size: 50px;
+    color: black;
 }
