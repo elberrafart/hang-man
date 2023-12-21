@@ -19,7 +19,7 @@ h2 {
     font-size: 50px;
 }
 
-.letter-container {
+#letter-container {
     display: flex;
     flex-wrap: wrap;
 }
@@ -49,7 +49,7 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 200px 400px;
+    padding: 100px 300px;
 }
 
 .correct-letter {
@@ -71,4 +71,10 @@ h2 {
 
 .lives {
     width: 150px;
+}
+
+.closed-box {
+    background-image: url('images/brick.jpg');
+    background-size: cover;
+    border: solid 4px #663300;
 }
