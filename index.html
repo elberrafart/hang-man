@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="app.js" defer></script>
 </head>
 <body>
     <h1>HangMan</h1>
@@ -23,7 +24,7 @@
             <div class="letter-box" id="g">G</div>
             <div class="letter-box" id="h">H</div>
             <div class="letter-box" id="i">I</div>
-            <div class="letter-box" id="g">J</div>
+            <div class="letter-box" id="j">J</div>
             <div class="letter-box" id="k">K</div>
             <div class="letter-box" id="l">L</div>
             <div class="letter-box" id="m">M</div>
@@ -39,17 +40,15 @@
             <div class="letter-box" id="w">W</div>
             <div class="letter-box" id="x">X</div>
             <div class="letter-box" id="y">Y</div>
-            <div class="letter-box closed-box" id="z">Z</div>
+            <div class="letter-box" id="z">Z</div>
         </div>
-        <div class="correct-letters-con">
-            <div class="correct-letter">R</div>
-            <div class="correct-letter">E</div>
-            <div class="correct-letter">A</div>
-            <div class="correct-letter">D</div>
+        <div class="guessed-letters-con" id="secret-word">
+            
         </div>
     </section>
     <h2>Lives</h2>
     <div class="lives-container">
+        <!-- Lives based on lives in const -->
         <img src="images/mushroom-lives.png" class="lives">
         <img src="images/mushroom-lives.png" class="lives">
         <img src="images/mushroom-lives.png" class="lives">
@@ -61,6 +60,5 @@
     <footer>
         
     </footer>
-    <script src="app.js"></script>
 </body>
 </html>

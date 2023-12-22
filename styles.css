@@ -22,10 +22,11 @@ h2 {
 #letter-container {
     display: flex;
     flex-wrap: wrap;
+    margin: 0 150px;
 }
 
 .letter-box {
-    background-color: #FFC803;
+    /* background-color: #FFC803; */
     max-width: 100px;
     height: 100px;
     margin: 10px;
@@ -45,14 +46,14 @@ h2 {
     cursor: pointer;
 }
 
-.correct-letters-con {
+.guessed-letters-con {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     padding: 100px 300px;
 }
 
-.correct-letter {
+.guessed-letter {
     border-bottom: solid white 5px;
     height: 100px;
     width: 100px;
