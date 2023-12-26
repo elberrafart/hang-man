@@ -21,6 +21,10 @@ function init(){
     selectedLetters = []
     lives = 7
     winner = null
+
+    updateGameEndMessage(null)
+    resetLives()
+    resetLetterStyles()
     render()
 }
 init()
@@ -28,32 +32,79 @@ init()
 
 function handleClick(e){
     if(e.target.id === 'letter-container' || selectedLetters.includes(e.target.id) || winner){
-        return
+        return;
     }
-    selectedLetters.push(e.target.id)
-    if (selectedWord.includes(e.target.id)) lives -= 1
-    winner = checkWinner()   
-    render()
+    selectedLetters.push(e.target.id);
+
+    if (!selectedWord.includes(e.target.id)) {
+        lives -= 1;
+        removeLife();
+    }
+
+    // Check for winner after each guess, correct or incorrect
+    winner = checkWinner();
+
+    render();
 }
 
 
-//Need a function to check for winner - If selectedLetters are in selectedWords
 function checkWinner() {
-    if (lives === 0) return 'L'
-    
-    let allLetters = true
+    if (lives === 0) return 'L';
 
-    for(let i = 0; i < selectedWord.length; i++){
-        if (!selectedLetters.includes(selectedWord[i])) allLetters = false
+    let allLettersGuessed = selectedWord.every(letter => selectedLetters.includes(letter));
+
+    return allLettersGuessed ? "W" : null;
+}
+
+
+function removeLife() {
+    const livesContainer = document.querySelector('.lives-container')
+    if (livesContainer.children.length > 0) {
+        livesContainer.removeChild(livesContainer.children[0]);
     }
-    if (allLetters) return "W"
+}
 
-    return null
+function resetLives() {
+    const livesContainer = document.querySelector('.lives-container');
+    livesContainer.innerHTML = ''; 
 
+    for (let i = 0; i < lives; i++) {
+        const lifeImage = document.createElement('img');
+        lifeImage.src = 'images/mushroom-lives.png';
+        lifeImage.className = 'lives';
+        livesContainer.appendChild(lifeImage);
+    }
+}
+
+
+function updateGameEndMessage(message) {
+    const livesContainer = document.querySelector('.lives-container');
+
+    livesContainer.innerHTML = '';
+
+    if (message) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'game-end-message';
+        messageDiv.textContent = message;
+        livesContainer.appendChild(messageDiv);
+
+        // Add Play Again button
+        const playAgainBtn = document.createElement('button');
+        playAgainBtn.textContent = 'Play Again';
+        playAgainBtn.onclick = init; 
+        livesContainer.appendChild(playAgainBtn);
+    }
+}
+
+function resetLetterStyles() {
+    'abcdefghijklmnopqrstuvwxyz'.split('').forEach(function(val){
+        const letterEl = document.getElementById(val);
+        letterEl.classList.remove('closed-box'); 
+        letterEl.style.backgroundColor = '#FFC803'; 
+    });
 }
 
 function render() {
-    //render letter container
     'abcdefghijklmnopqrstuvwxyz'.split('').forEach(function(val){
         const letterEl = document.getElementById(val)
         if (selectedLetters.includes(val) && !selectedWord.includes(val)) {
@@ -64,10 +115,8 @@ function render() {
         else letterEl.style.backgroundColor = '#FFC803' 
     })
     
-    //render secret word
     const wordContainer = document.getElementById('secret-word')
     wordContainer.innerHTML = ''
-
 
     selectedWord.forEach(function(val){
         const guessedLetter = document.createElement('div')
@@ -76,4 +125,13 @@ function render() {
         if (selectedLetters.includes(val)) guessedLetter.innerText = val.toUpperCase()
         wordContainer.appendChild(guessedLetter)
     })
+
+    if (winner) {
+        if (winner === 'W') {
+            updateGameEndMessage('Congratulations! You won!');
+        } else if (winner === 'L') {
+            updateGameEndMessage('Sorry, you lost. Try again!');
+        }
+        return;
+    }
 }

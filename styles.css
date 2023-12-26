@@ -79,3 +79,10 @@ h2 {
     background-size: cover;
     border: solid 4px #663300;
 }
+
+.game-end-message + button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+}
