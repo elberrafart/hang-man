@@ -2,6 +2,9 @@
 
 Screenshot here: (https://imgur.com/a/ghd3rcu)
 
+##Play Game Here
+https://elberrafart.github.io/hang-man/
+
 ## Technologies Used
 - HTML
 - CSS
@@ -28,5 +31,5 @@ One of the main challenges was integrating the lives counter with the gameplay l
 
 ---
 
-Stay tuned for updates as we continue to develop and enhance Super Plumber Hangman!
+Stay tuned for updates as I continue to develop and enhance Super Plumber Hangman!
 
