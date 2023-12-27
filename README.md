@@ -2,7 +2,8 @@
 
 Screenshot here: (https://imgur.com/a/ghd3rcu)
 
-##Play Game Here
+##Play Game Here: 
+
 https://elberrafart.github.io/hang-man/
 
 ## Technologies Used
