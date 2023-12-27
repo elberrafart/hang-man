@@ -1,6 +1,6 @@
 # Super Plumber Hangman
 
-![Super Plumber Hangman Screenshot](/path/to/Screenshot.png)
+![Super Plumber Hangman Screenshot]([/path/to/Screenshot.png](https://imgur.com/a/ghd3rcu))
 
 ## Technologies Used
 - HTML
