@@ -46,28 +46,28 @@ h1, h2 {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 2vw; /* Reduced padding for compact layout */
+    padding: 2vw; 
 }
 
 .guessed-letter {
     border-bottom: solid white 5px;
-    height: 8vw; /* Adjusted for responsiveness */
-    width: 8vw; /* Adjusted for responsiveness */
+    height: 8vw; 
+    width: 8vw; 
     display: flex;
     justify-content: center;
     align-items: flex-end; 
-    font-size: 4vw; /* Adjusted font size */
+    font-size: 4vw; 
     color: black;
 }
 
 .lives-container {
     display: flex;
     justify-content: space-around;
-    padding: 2vw 5vw; /* Adjusted padding */
+    padding: 2vw 5vw; 
 }
 
 .lives {
-    width: 8vw; /* Adjusted size */
+    width: 8vw; 
 }
 
 .closed-box {
