@@ -2,6 +2,8 @@ html, body {
     height: 100%;
     width: 100%;
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -9,36 +11,30 @@ body {
     font-family: 'Press Start 2P';
 }
 
-h1 {
+h1, h2 {
     text-align: center;
-    font-size: 100px;
-}
-
-h2 {
-    text-align: center;
-    font-size: 50px;
+    margin: 1vh 0;
+    font-size: 6vw;
 }
 
 #letter-container {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 150px;
+    margin: 2vw;
 }
 
 .letter-box {
-    /* background-color: #FFC803; */
-    max-width: 100px;
-    height: 100px;
-    margin: 10px;
+    max-width: 15%; 
+    height: 12vw; 
+    margin: 1vw; 
     border: solid black 4px;
     text-align: center;
-    font-size: 50px;
+    font-size: 4vw; 
     color: white;
-    /* Adjust Positioning */
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    flex-basis: 10%;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 15%; 
 }
 
 .letter-box:hover {
@@ -50,28 +46,28 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 100px 300px;
+    padding: 2vw; /* Reduced padding for compact layout */
 }
 
 .guessed-letter {
     border-bottom: solid white 5px;
-    height: 100px;
-    width: 100px;
+    height: 8vw; /* Adjusted for responsiveness */
+    width: 8vw; /* Adjusted for responsiveness */
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: flex-end; /* Align text to the bottom */
-    font-size: 50px;
+    justify-content: center;
+    align-items: flex-end; 
+    font-size: 4vw; /* Adjusted font size */
     color: black;
 }
 
 .lives-container {
     display: flex;
     justify-content: space-around;
-    padding: 0 300px;
+    padding: 2vw 5vw; /* Adjusted padding */
 }
 
 .lives {
-    width: 150px;
+    width: 8vw; /* Adjusted size */
 }
 
 .closed-box {
@@ -85,4 +81,31 @@ h2 {
     padding: 10px 20px;
     font-size: 20px;
     cursor: pointer;
+}
+
+.play-again {
+    background-color: green;
+}
+
+@media screen and (max-width: 600px) {
+    h1 { font-size: 10vw; }
+    h2 { font-size: 8vw; }
+
+    .letter-box { 
+        flex-basis: 20%; 
+        margin: 2vw; 
+        font-size: 5vw;
+        height: 15vw; 
+    }
+
+    .guessed-letters-con { padding: 5vw; }
+
+    .lives-container { padding: 5vw; }
+
+    .lives { width: 15vw; }
+
+    .play-again {
+        padding: 2vw;
+        font-size: 4vw;
+    }
 }
