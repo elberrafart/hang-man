@@ -3,62 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HangMan</title>
-    <link href="styles.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Super Plumber Hangman</title>
+    <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <script src="app.js" defer></script>
 </head>
 <body>
-    <h1>HangMan</h1>
-    <section>
-        <div id="letter-container">
-            <!-- Add ID to letter -->
-            <div class="letter-box" id="a">A</div>
-            <div class="letter-box" id="b">B</div>
-            <div class="letter-box" id="c">C</div>
-            <div class="letter-box" id="d">D</div>
-            <div class="letter-box" id="e">E</div>
-            <div class="letter-box" id="f">F</div>
-            <div class="letter-box" id="g">G</div>
-            <div class="letter-box" id="h">H</div>
-            <div class="letter-box" id="i">I</div>
-            <div class="letter-box" id="j">J</div>
-            <div class="letter-box" id="k">K</div>
-            <div class="letter-box" id="l">L</div>
-            <div class="letter-box" id="m">M</div>
-            <div class="letter-box" id="n">N</div>
-            <div class="letter-box" id="o">O</div>
-            <div class="letter-box" id="p">P</div>
-            <div class="letter-box" id="q">Q</div>
-            <div class="letter-box" id="r">R</div>
-            <div class="letter-box" id="s">S</div>
-            <div class="letter-box" id="t">T</div>
-            <div class="letter-box" id="u">U</div>
-            <div class="letter-box" id="v">V</div>
-            <div class="letter-box" id="w">W</div>
-            <div class="letter-box" id="x">X</div>
-            <div class="letter-box" id="y">Y</div>
-            <div class="letter-box" id="z">Z</div>
-        </div>
-        <div class="guessed-letters-con" id="secret-word">
-            
-        </div>
-    </section>
-    <h2>Lives</h2>
-    <div class="lives-container">
-        <!-- Lives based on lives in const -->
-        <img src="images/mushroom-lives.png" class="lives">
-        <img src="images/mushroom-lives.png" class="lives">
-        <img src="images/mushroom-lives.png" class="lives">
-        <img src="images/mushroom-lives.png" class="lives">
-        <img src="images/mushroom-lives.png" class="lives">
-        <img src="images/mushroom-lives.png" class="lives">
-        <img src="images/mushroom-lives.png" class="lives">
+    <!-- Mario Character Container -->
+    <div id="mario-container">
+        <div id="mario-character"></div>
     </div>
-    <footer>
-        
-    </footer>
+
+    <!-- Background Music -->
+    <audio id="bg-music" loop>
+        <source src="https://www.silvermansound.com/wp-content/uploads/happynes.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="game-wrapper">
+        <h1>HangMan</h1>
+        <div id="secret-word" class="guessed-letters-con"></div>
+
+        <div id="letter-container" class="letter-container">
+            <div id="A" class="letter-box">A</div>
+            <div id="B" class="letter-box">B</div>
+            <div id="C" class="letter-box">C</div>
+            <div id="D" class="letter-box">D</div>
+            <div id="E" class="letter-box">E</div>
+            <div id="F" class="letter-box">F</div>
+            <div id="G" class="letter-box">G</div>
+            <div id="H" class="letter-box">H</div>
+            <div id="I" class="letter-box">I</div>
+            <div id="J" class="letter-box">J</div>
+            <div id="K" class="letter-box">K</div>
+            <div id="L" class="letter-box">L</div>
+            <div id="M" class="letter-box">M</div>
+            <div id="N" class="letter-box">N</div>
+            <div id="O" class="letter-box">O</div>
+            <div id="P" class="letter-box">P</div>
+            <div id="Q" class="letter-box">Q</div>
+            <div id="R" class="letter-box">R</div>
+            <div id="S" class="letter-box">S</div>
+            <div id="T" class="letter-box">T</div>
+            <div id="U" class="letter-box">U</div>
+            <div id="V" class="letter-box">V</div>
+            <div id="W" class="letter-box">W</div>
+            <div id="X" class="letter-box">X</div>
+            <div id="Y" class="letter-box">Y</div>
+            <div id="Z" class="letter-box">Z</div>
+        </div>
+
+        <div class="lives-section">
+            <p class="lives-label">Lives</p>
+            <div class="lives-container"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 </html>

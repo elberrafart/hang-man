@@ -1,88 +1,285 @@
+/* Super Plumber Hangman - Responsive & Mario Themed */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html, body {
-    height: 100%;
-    width: 100%;
-    box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
-    background-color: #4ABDFF;
-    font-family: 'Press Start 2P';
+  background: linear-gradient(180deg, #5C94FC 0%, #4ABDFF 50%, #87CEEB 100%);
+  font-family: 'Press Start 2P', cursive;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Mario Character - Retro pixel style */
+#mario-container {
+  position: fixed;
+  bottom: 2vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Retro pixel plumber - CSS box-shadow pixel art */
+#mario-character {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  box-shadow:
+    /* Row 0 - Cap */
+    0px 0px 0 0 #E52521,
+    16px 0px 0 0 #E52521,
+    32px 0px 0 0 #E52521,
+    48px 0px 0 0 #E52521,
+    /* Row 1 - Cap + face */
+    0px 16px 0 0 #E52521,
+    16px 16px 0 0 #FFDBAC,
+    32px 16px 0 0 #FFDBAC,
+    48px 16px 0 0 #E52521,
+    /* Row 2 - Face + cap */
+    0px 32px 0 0 #E52521,
+    16px 32px 0 0 #5D4037,
+    32px 32px 0 0 #FFDBAC,
+    48px 32px 0 0 #E52521,
+    /* Row 3 - Body */
+    0px 48px 0 0 #0066CC,
+    16px 48px 0 0 #0066CC,
+    32px 48px 0 0 #0066CC,
+    48px 48px 0 0 #0066CC,
+    /* Row 4 - Body */
+    0px 64px 0 0 #0066CC,
+    16px 64px 0 0 #0066CC,
+    32px 64px 0 0 #0066CC,
+    48px 64px 0 0 #0066CC,
+    /* Row 5 - Legs */
+    0px 80px 0 0 #8B4513,
+    16px 80px 0 0 #0066CC,
+    32px 80px 0 0 #0066CC,
+    48px 80px 0 0 #8B4513;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  transform: scale(2);
+  transform-origin: bottom center;
+  transition: transform 0.3s ease;
+}
+
+/* Win animation - Mario grows (power-up style) */
+#mario-character.mario-win {
+  animation: marioGrow 0.6s ease-out forwards;
+}
+
+@keyframes marioGrow {
+  0% { transform: scale(2); }
+  50% { transform: scale(3); }
+  100% { transform: scale(3.2); }
+}
+
+/* Lose animation - Classic Mario death (spin and fall) */
+#mario-character.mario-die {
+  animation: marioDie 1.2s ease-in forwards;
+}
+
+@keyframes marioDie {
+  0% {
+    transform: scale(2) translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(2) translateY(-40px) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2) translateY(80vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Game Wrapper - Fits on screen */
+.game-wrapper {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1vh 2vw 120px;
+  max-width: 100vw;
 }
 
 h1 {
-    text-align: center;
-    font-size: 100px;
+  text-align: center;
+  font-size: clamp(28px, 8vw, 80px);
+  margin: 1vh 0;
+  color: #E52521;
+  text-shadow: 3px 3px 0 #000, -1px -1px 0 #000;
 }
 
-h2 {
-    text-align: center;
-    font-size: 50px;
-}
-
-#letter-container {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 150px;
-}
-
-.letter-box {
-    /* background-color: #FFC803; */
-    max-width: 100px;
-    height: 100px;
-    margin: 10px;
-    border: solid black 4px;
-    text-align: center;
-    font-size: 50px;
-    color: white;
-    /* Adjust Positioning */
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    flex-basis: 10%;
-}
-
-.letter-box:hover {
-    background-color: #FDAD16;
-    cursor: pointer;
-}
-
+/* Secret Word / Guessed Letters */
 .guessed-letters-con {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 100px 300px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(4px, 1vw, 12px);
+  padding: 1vh 2vw;
+  margin: 1vh 0;
+  max-width: 100%;
 }
 
 .guessed-letter {
-    border-bottom: solid white 5px;
-    height: 100px;
-    width: 100px;
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: flex-end; /* Align text to the bottom */
-    font-size: 50px;
-    color: black;
+  border-bottom: solid 4px #000;
+  height: clamp(40px, 8vh, 80px);
+  width: clamp(28px, 6vw, 60px);
+  min-width: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-size: clamp(20px, 4vw, 40px);
+  color: #000;
 }
 
-.lives-container {
-    display: flex;
-    justify-content: space-around;
-    padding: 0 300px;
+/* Letter Container */
+.letter-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(4px, 1vw, 10px);
+  margin: 1vh 0;
+  padding: 0 2vw;
+  max-width: 100%;
 }
 
-.lives {
-    width: 150px;
+.letter-box {
+  width: clamp(36px, 8vw, 70px);
+  height: clamp(36px, 8vw, 70px);
+  min-width: 36px;
+  min-height: 36px;
+  border: solid 3px #000;
+  text-align: center;
+  font-size: clamp(16px, 3vw, 32px);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.letter-box:hover {
+  background-color: #FDAD16 !important;
+  transform: scale(1.05);
+}
+
+.letter-box:active {
+  transform: scale(0.98);
 }
 
 .closed-box {
-    background-image: url('images/brick.jpg');
-    background-size: cover;
-    border: solid 4px #663300;
+  background-image: url('images/brick.jpg');
+  background-size: cover;
+  border: solid 3px #663300;
+  cursor: default;
+  transform: none !important;
 }
 
-.game-end-message + button {
-    margin-top: 20px;
-    padding: 10px 20px;
+/* Lives Section */
+.lives-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+  padding: 1vh 2vw;
+}
+
+.lives-label {
+  font-size: clamp(12px, 2.5vw, 20px);
+  margin-bottom: 0.5vh;
+}
+
+.lives-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.lives {
+  width: clamp(40px, 10vw, 100px);
+  height: auto;
+}
+
+/* Game End Message */
+.game-end-message {
+  font-size: clamp(10px, 2vw, 16px);
+  text-align: center;
+  margin-bottom: 1vh;
+  line-height: 1.8;
+  padding: 0 1vw;
+}
+
+/* Play Again Button - Mario style (yellow with retro lettering) */
+.game-end-message + button,
+.play-again-btn {
+  font-family: 'Press Start 2P', cursive;
+  background: linear-gradient(180deg, #FFE135 0%, #FFC803 50%, #E5A800 100%);
+  color: #8B4513;
+  border: 4px solid #663300;
+  padding: 12px 24px;
+  font-size: clamp(10px, 2vw, 14px);
+  cursor: pointer;
+  margin-top: 12px;
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
+  box-shadow: 3px 3px 0 #663300, inset 0 1px 0 rgba(255,255,255,0.4);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.game-end-message + button:hover,
+.play-again-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(180deg, #FFF176 0%, #FFE135 50%, #FFC803 100%);
+}
+
+.game-end-message + button:active,
+.play-again-btn:active {
+  transform: scale(0.98);
+  box-shadow: 1px 1px 0 #663300, inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+/* Responsive breakpoints */
+@media (max-width: 480px) {
+  .game-wrapper {
+    padding: 0.5vh 1vw 100px;
+  }
+  
+  #mario-character {
+    width: 36px;
+    height: 48px;
+    background-size: 12px 12px, 12px 9px, 18px 18px, 18px 18px, 9px 3px, 1.5px 1.5px, 1.5px 1.5px;
+    background-position: 6px 3px, 6px 0, 3px 15px, 3px 30px, 7px 14px, 9px 10px, 17px 10px;
+  }
+}
+
+@media (max-height: 700px) {
+  h1 {
+    font-size: clamp(20px, 6vw, 50px);
+  }
+  
+  .guessed-letter {
+    height: 36px;
     font-size: 20px;
-    cursor: pointer;
+  }
+  
+  .letter-box {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
 }
