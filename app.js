@@ -53,12 +53,14 @@ function init() {
 }
 
 function handleClick(e) {
-  if (e.target.id === 'letter-container' || selectedLetters.includes(e.target.id) || winner) {
+  const letter = e.target.id;
+  if (letter === 'letter-container' || selectedLetters.includes(letter.toLowerCase()) || winner) {
     return;
   }
-  selectedLetters.push(e.target.id);
+  const letterLower = letter.toLowerCase();
+  selectedLetters.push(letterLower);
 
-  if (!selectedWord.includes(e.target.id)) {
+  if (!selectedWord.includes(letterLower)) {
     lives -= 1;
     removeLife();
   }
@@ -124,7 +126,7 @@ function updateGameEndMessage(message) {
 
 function resetLetterStyles() {
   'abcdefghijklmnopqrstuvwxyz'.split('').forEach(function(val) {
-    const letterEl = document.getElementById(val);
+    const letterEl = document.getElementById(val.toUpperCase());
     if (letterEl) {
       letterEl.classList.remove('closed-box', 'correct-box');
       letterEl.style.backgroundColor = '#FFC803';
@@ -135,7 +137,7 @@ function resetLetterStyles() {
 
 function render() {
   'abcdefghijklmnopqrstuvwxyz'.split('').forEach(function(val) {
-    const letterEl = document.getElementById(val);
+    const letterEl = document.getElementById(val.toUpperCase());
     if (!letterEl) return;
     if (selectedLetters.includes(val) && !selectedWord.includes(val)) {
       letterEl.classList.add('closed-box');
