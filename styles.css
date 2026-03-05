@@ -287,12 +287,12 @@ h1 {
   letter-spacing: 4px;
 }
 
-/* Mute button */
+/* Mute button - above start overlay so it's always clickable */
 .mute-btn {
   position: fixed;
   top: 12px;
   right: 12px;
-  z-index: 10;
+  z-index: 150;
   font-family: 'Press Start 2P', cursive;
   font-size: 12px;
   padding: 8px 12px;

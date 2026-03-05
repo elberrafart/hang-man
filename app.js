@@ -43,12 +43,16 @@ if (startOverlay) {
 }
 
 // Mute toggle
-if (muteBtn) {
-  muteBtn.addEventListener('click', function() {
-    const muted = bgMusic.muted;
-    bgMusic.muted = !muted;
-    muteBtn.textContent = muted ? '🔊 Mute' : '🔇 Unmute';
-    muteBtn.classList.toggle('muted', !muted);
+if (muteBtn && bgMusic) {
+  muteBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    bgMusic.muted = !bgMusic.muted;
+    muteBtn.textContent = bgMusic.muted ? '🔇 Unmute' : '🔊 Mute';
+    muteBtn.classList.toggle('muted', bgMusic.muted);
+    if (!bgMusic.muted && musicStarted) {
+      bgMusic.play().catch(() => {});
+    }
   });
 }
 
