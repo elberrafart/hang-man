@@ -19,21 +19,17 @@ body {
   position: relative;
 }
 
-/* Mario Character - Retro pixel style, fully visible on screen */
+/* Mario Character - Center of screen */
 #mario-container {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 22vh;
-  min-height: 140px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   z-index: 1;
   pointer-events: none;
-  /* Platform strip so Mario sits "on" the ground and isn't cut off */
-  background: linear-gradient(180deg, transparent 0%, rgba(139, 90, 43, 0.3) 70%, rgba(101, 67, 33, 0.6) 100%);
 }
 
 /* Retro pixel plumber - CSS box-shadow pixel art */
@@ -79,15 +75,27 @@ body {
   transition: transform 0.3s ease;
 }
 
-/* Win animation - Mario grows (power-up style) */
+/* Win animation - Mario grows + bounce + confetti feel */
 #mario-character.mario-win {
-  animation: marioGrow 0.6s ease-out forwards;
+  animation: marioWin 1.2s ease-out forwards;
 }
 
-@keyframes marioGrow {
-  0% { transform: scale(2); }
-  50% { transform: scale(3); }
-  100% { transform: scale(3.2); }
+@keyframes marioWin {
+  0% { transform: scale(2); filter: brightness(1); }
+  25% { transform: scale(2.8); filter: brightness(1.3); }
+  50% { transform: scale(3); filter: brightness(1.5); }
+  75% { transform: scale(2.9); filter: brightness(1.4); }
+  100% { transform: scale(3.2); filter: brightness(1.5); }
+}
+
+/* Win overlay / celebration */
+.win-celebration {
+  animation: winPulse 0.5s ease-in-out 3;
+}
+
+@keyframes winPulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.15); }
 }
 
 /* Lose animation - Classic Mario death (spin and fall) */
@@ -118,7 +126,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1vh 2vw 24vh;
+  padding: 1vh 2vw 2vh;
   max-width: 100vw;
 }
 
@@ -270,14 +278,76 @@ h1 {
   box-shadow: 1px 1px 0 #663300, inset 0 1px 0 rgba(255,255,255,0.4);
 }
 
+/* Revealed word on loss */
+.revealed-word {
+  font-size: clamp(12px, 2.5vw, 18px);
+  margin: 1vh 0;
+  color: #B71C1C;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+/* Mute button */
+.mute-btn {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 3px solid #333;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.mute-btn:hover {
+  transform: scale(1.05);
+}
+
+.mute-btn.muted {
+  background: rgba(255, 200, 50, 0.9);
+}
+
+/* Click to start overlay - enables music on first interaction */
+.start-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.start-overlay.hidden {
+  display: none;
+}
+
+.start-overlay span {
+  font-size: clamp(14px, 3vw, 24px);
+  color: #fff;
+  text-shadow: 2px 2px 0 #000;
+  padding: 20px 40px;
+  background: rgba(229, 37, 33, 0.9);
+  border: 4px solid #fff;
+  animation: startPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes startPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
 /* Responsive breakpoints */
 @media (max-width: 480px) {
   .game-wrapper {
-    padding: 0.5vh 1vw 22vh;
-  }
-  
-  #mario-container {
-    min-height: 120px;
+    padding: 0.5vh 1vw 2vh;
   }
 }
 

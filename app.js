@@ -21,38 +21,76 @@ let selectedWord;
 let selectedLetters;
 let lives;
 let winner;
+let musicStarted = false;
 
 const letterContainer = document.getElementById('letter-container');
 letterContainer.addEventListener('click', handleClick);
 
 const bgMusic = document.getElementById('bg-music');
+const winMusic = document.getElementById('win-music');
+const loseMusic = document.getElementById('lose-music');
 const marioCharacter = document.getElementById('mario-character');
+const startOverlay = document.getElementById('start-overlay');
+const muteBtn = document.getElementById('mute-btn');
+
+// Start overlay - first click starts music and hides overlay (browsers require user interaction for audio)
+if (startOverlay) {
+  startOverlay.addEventListener('click', function startGame() {
+    startOverlay.classList.add('hidden');
+    musicStarted = true;
+    tryPlayBgMusic();
+  });
+}
+
+// Mute toggle
+if (muteBtn) {
+  muteBtn.addEventListener('click', function() {
+    const muted = bgMusic.muted;
+    bgMusic.muted = !muted;
+    muteBtn.textContent = muted ? '🔊 Mute' : '🔇 Unmute';
+    muteBtn.classList.toggle('muted', !muted);
+  });
+}
+
+function tryPlayBgMusic() {
+  if (bgMusic && musicStarted && !bgMusic.muted) {
+    bgMusic.currentTime = 0;
+    bgMusic.play().catch(() => {});
+  }
+}
 
 function init() {
   const raw = words[Math.floor(Math.random() * words.length)].toLowerCase();
   selectedWord = raw.replace(/[^a-z]/g, '').split('');
   if (selectedWord.length === 0) selectedWord = ['mario'];
-  
+
   selectedLetters = [];
   lives = 7;
   winner = null;
 
-  // Reset Mario character
-  marioCharacter.classList.remove('mario-win', 'mario-die');
+  // Hide start overlay if we've already started (Play Again)
+  if (musicStarted && startOverlay) {
+    startOverlay.classList.add('hidden');
+  }
 
-  updateGameEndMessage(null);
+  // Reset Mario character
+  if (marioCharacter) {
+    marioCharacter.classList.remove('mario-win', 'mario-die');
+  }
+
+  updateGameEndMessage(null, null);
   resetLives();
   resetLetterStyles();
   render();
 
-  // Start background music
-  if (bgMusic) {
-    bgMusic.currentTime = 0;
-    bgMusic.play().catch(() => {}); // Autoplay may be blocked
-  }
+  // Start/continue background music
+  tryPlayBgMusic();
 }
 
 function handleClick(e) {
+  // First click might be on start overlay
+  if (startOverlay && !startOverlay.classList.contains('hidden')) return;
+
   const letter = e.target.id;
   if (letter === 'letter-container' || selectedLetters.includes(letter.toLowerCase()) || winner) {
     return;
@@ -70,10 +108,22 @@ function handleClick(e) {
 
   if (winner) {
     if (winner === 'W') {
-      marioCharacter.classList.add('mario-win');
+      if (marioCharacter) marioCharacter.classList.add('mario-win');
+      bgMusic.pause();
+      if (winMusic) {
+        winMusic.currentTime = 0;
+        winMusic.play().catch(() => {});
+      }
+      document.body.classList.add('win-celebration');
     } else if (winner === 'L') {
-      marioCharacter.classList.add('mario-die');
+      if (marioCharacter) marioCharacter.classList.add('mario-die');
+      bgMusic.pause();
+      if (loseMusic) {
+        loseMusic.currentTime = 0;
+        loseMusic.play().catch(() => {});
+      }
     }
+    return;
   }
 }
 
@@ -104,7 +154,7 @@ function resetLives() {
   }
 }
 
-function updateGameEndMessage(message) {
+function updateGameEndMessage(message, revealedWord) {
   const livesContainer = document.querySelector('.lives-container');
   if (!livesContainer) return;
 
@@ -116,10 +166,20 @@ function updateGameEndMessage(message) {
     messageDiv.textContent = message;
     livesContainer.appendChild(messageDiv);
 
+    if (revealedWord) {
+      const wordDiv = document.createElement('div');
+      wordDiv.className = 'revealed-word';
+      wordDiv.textContent = revealedWord;
+      livesContainer.appendChild(wordDiv);
+    }
+
     const playAgainBtn = document.createElement('button');
     playAgainBtn.textContent = 'Play Again';
     playAgainBtn.className = 'play-again-btn';
-    playAgainBtn.onclick = init;
+    playAgainBtn.onclick = function() {
+      document.body.classList.remove('win-celebration');
+      init();
+    };
     livesContainer.appendChild(playAgainBtn);
   }
 }
@@ -160,9 +220,10 @@ function render() {
   if (!wordContainer) return;
   wordContainer.innerHTML = '';
 
-  selectedWord.forEach(function(val) {
+  // Each letter in the word gets its own slot - duplicates fill all instances automatically
+  selectedWord.forEach(function(val, idx) {
     const guessedLetter = document.createElement('div');
-    guessedLetter.id = `g-${val}`;
+    guessedLetter.id = 'g-' + val + '-' + idx;
     guessedLetter.classList.add('guessed-letter');
     if (selectedLetters.includes(val)) guessedLetter.innerText = val.toUpperCase();
     wordContainer.appendChild(guessedLetter);
@@ -170,9 +231,10 @@ function render() {
 
   if (winner) {
     if (winner === 'W') {
-      updateGameEndMessage('Congratulations! You won!');
+      updateGameEndMessage('Congratulations! You won!', null);
     } else if (winner === 'L') {
-      updateGameEndMessage('Sorry, you lost. Try again!');
+      const wordStr = selectedWord.join('').toUpperCase();
+      updateGameEndMessage('Sorry, you lost! The word was:', wordStr);
     }
     return;
   }

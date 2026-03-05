@@ -14,9 +14,23 @@
     </div>
 
     <!-- Background Music -->
-    <audio id="bg-music" loop>
+    <audio id="bg-music" loop preload="auto">
         <source src="https://www.silvermansound.com/wp-content/uploads/happynes.mp3" type="audio/mpeg">
     </audio>
+    <audio id="win-music" preload="auto">
+        <source src="https://opengameart.org/sites/default/files/Heavy_ConceptB.wav" type="audio/wav">
+    </audio>
+    <audio id="lose-music" preload="auto">
+        <source src="https://opengameart.org/sites/default/files/GAMEOVER.wav" type="audio/wav">
+    </audio>
+
+    <!-- Mute Button -->
+    <button id="mute-btn" class="mute-btn" title="Toggle music">🔊 Mute</button>
+
+    <!-- Click to start - enables music (browsers block autoplay until user interacts) -->
+    <div id="start-overlay" class="start-overlay">
+        <span>Click anywhere to start game &amp; music</span>
+    </div>
 
     <div class="game-wrapper">
         <h1>HangMan</h1>
