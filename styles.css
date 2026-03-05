@@ -19,14 +19,21 @@ body {
   position: relative;
 }
 
-/* Mario Character - Retro pixel style */
+/* Mario Character - Retro pixel style, fully visible on screen */
 #mario-container {
   position: fixed;
-  bottom: 2vh;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 22vh;
+  min-height: 140px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
   z-index: 1;
   pointer-events: none;
+  /* Platform strip so Mario sits "on" the ground and isn't cut off */
+  background: linear-gradient(180deg, transparent 0%, rgba(139, 90, 43, 0.3) 70%, rgba(101, 67, 33, 0.6) 100%);
 }
 
 /* Retro pixel plumber - CSS box-shadow pixel art */
@@ -111,7 +118,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1vh 2vw 120px;
+  padding: 1vh 2vw 24vh;
   max-width: 100vw;
 }
 
@@ -182,12 +189,22 @@ h1 {
   transform: scale(0.98);
 }
 
+/* Wrong letter: brick image (Mario theme) */
 .closed-box {
-  background-image: url('images/brick.jpg');
-  background-size: cover;
+  background-color: transparent !important;
+  background-image: url('images/brick.jpg') !important;
+  background-size: cover !important;
   border: solid 3px #663300;
   cursor: default;
   transform: none !important;
+}
+
+/* Correct letter: green */
+.letter-box.correct-box {
+  background-color: #2e7d32 !important;
+  background-image: none !important;
+  border: solid 3px #1b5e20;
+  cursor: default;
 }
 
 /* Lives Section */
@@ -256,14 +273,11 @@ h1 {
 /* Responsive breakpoints */
 @media (max-width: 480px) {
   .game-wrapper {
-    padding: 0.5vh 1vw 100px;
+    padding: 0.5vh 1vw 22vh;
   }
   
-  #mario-character {
-    width: 36px;
-    height: 48px;
-    background-size: 12px 12px, 12px 9px, 18px 18px, 18px 18px, 9px 3px, 1.5px 1.5px, 1.5px 1.5px;
-    background-position: 6px 3px, 6px 0, 3px 15px, 3px 30px, 7px 14px, 9px 10px, 17px 10px;
+  #mario-container {
+    min-height: 120px;
   }
 }
 

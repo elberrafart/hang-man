@@ -126,8 +126,9 @@ function resetLetterStyles() {
   'abcdefghijklmnopqrstuvwxyz'.split('').forEach(function(val) {
     const letterEl = document.getElementById(val);
     if (letterEl) {
-      letterEl.classList.remove('closed-box');
+      letterEl.classList.remove('closed-box', 'correct-box');
       letterEl.style.backgroundColor = '#FFC803';
+      letterEl.style.backgroundImage = '';
     }
   });
 }
@@ -138,12 +139,18 @@ function render() {
     if (!letterEl) return;
     if (selectedLetters.includes(val) && !selectedWord.includes(val)) {
       letterEl.classList.add('closed-box');
+      letterEl.classList.remove('correct-box');
+      letterEl.style.backgroundColor = 'transparent';
+      letterEl.style.backgroundImage = '';
+    } else if (selectedLetters.includes(val) && selectedWord.includes(val)) {
+      letterEl.classList.add('correct-box');
+      letterEl.classList.remove('closed-box');
       letterEl.style.backgroundColor = '';
-    }
-    if (selectedLetters.includes(val) && selectedWord.includes(val)) {
-      letterEl.style.backgroundColor = 'green';
-    } else if (!letterEl.classList.contains('closed-box')) {
+      letterEl.style.backgroundImage = '';
+    } else {
+      letterEl.classList.remove('closed-box', 'correct-box');
       letterEl.style.backgroundColor = '#FFC803';
+      letterEl.style.backgroundImage = '';
     }
   });
 
